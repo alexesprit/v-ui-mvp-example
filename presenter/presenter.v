@@ -1,27 +1,32 @@
 module presenter
 
 import model
+import view
 
 pub struct Presenter {
 pub:
 	model &model.Number
-	view &view.View
+	view &view.IAppView
 }
 
-pub fn create_presenter(view mut &view.View) &Presenter {
+// pub interface IAppView {
+// 	start()
+// 	set_textbox_value(value int)
+// }
+
+pub fn create_presenter(view &view.IAppView) &Presenter {
 	model := &model.Number { 2 }
+	view.set_textbox_value(model.value)
 
-	view.set_value(model.value)
-
-	return &Presenter { model, view }
+	return &Presenter { model: model, view: view }
 }
 
 pub fn (this mut Presenter) on_increment_click() {
 	this.model.increment()
-	this.view.set_value(this.model.value)
+	this.view.set_textbox_value(this.model.value)
 }
 
 pub fn (this mut Presenter) on_decrement_click() {
 	this.model.decrement()
-	this.view.set_value(this.model.value)
+	this.view.set_textbox_value(this.model.value)
 }

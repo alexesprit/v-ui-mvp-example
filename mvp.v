@@ -1,8 +1,8 @@
 module main
 
-import view
+import gui
 
 fn main() {
-	v := view.create_view()
-	v.run()
+	v := gui.create_app_view()
+	v.start()
 }
