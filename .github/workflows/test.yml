@@ -13,5 +13,11 @@ jobs:
     - uses: nocturlab/setup-vlang-action@v1
       with:
         v-version: master
+    - name: Install V UI
+      run: v install ui
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install --quiet -y libglfw3 libglfw3-dev libfreetype6-dev
     - name: Build MVP example
       run: v .
